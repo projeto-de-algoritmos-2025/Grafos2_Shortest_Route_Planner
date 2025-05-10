@@ -1,18 +1,22 @@
-import {BrowserRouter, Route,Navigate} from 'react-router';
-import { Home } from './Home';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { Home } from './pages/Home';
+
 export const AppRoutes = () => {
 
     return(
         <>
         
             <BrowserRouter>
-            
 
-                <Route path= '/home' element= {<Home/>}/>
-                <Route path= '*' element= {<Navigate to = '/home'/>}/>
+                <Routes>
+
+                    <Route path= '/home' element= {<Home/>}/>
+                    <Route path= '*' element= {<Navigate to = '/home'/>}/>
+
+                </Routes>
+                          
             
-            </BrowserRouter>
-            
+            </BrowserRouter>            
         
         </>
     )
