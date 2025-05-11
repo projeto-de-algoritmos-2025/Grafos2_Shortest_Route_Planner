@@ -1,4 +1,4 @@
-# Grafos2_shortest_route_planner
+# Grafos2_Shortest_Route_Planner
 
 **Número da Lista**: X<br>
 **Conteúdo da Disciplina**: Projeto de Algoritmos<br>
@@ -9,8 +9,8 @@
 | 22/1007958  |  Cláudio Henrique dos Santos Carvalho |
 | 22/1007706  |  Elias Faria de Oliveira |
 
-## Sobre 
-Descrição da aplicação.
+## Sobre
+O Shortest Route Planner é uma aplicação simples que implementa o algoritmo de dyjkstra em um grafo já pré-definido e apresenta uma simulação de como seria a rota de uma caminhão de entrega que parte de um nó que é o ponto de partida, passa pelo o segundo que é o ponto de coleta e por ultimo chega ao nó final que é o da entrega. A aplicação disponibiliza ao usuário selecionar os três nós desejados e retorna a rota mais eficiente para realizar a rota com os nós selecionados.
 
 ## Screenshots
 
@@ -22,27 +22,36 @@ Screenshot da tela Home do projeto:
 [Link da Gravação]()
 
 ## Instalação 
-**Linguagem**: Typescript<br>
-**Framework**: React<br>
+**Linguagem**: Typescript 5.8.3<br>
+**Framework**: React 19.1.0<br>
 
-1. Tendo o Python instalado na sua máquina, basta clonar o projeto e rodar o comando abaixo na pasta raiz:
+1. Baixe o Node.js :
+```winget install Schniz.fnm```
 
-    ```pip install -r requirements.txt```
+2. instalar a Node.js:
+```fnm install 22```
 
-2. Depois, dentro da pasta ```tasks-list``` execute o arquivo ```app.py``` com o comando:
-    ```python app.py```
+3. Consultar a versão da Node.js(opcional):
+```node -v ```
 
-3. Você verá algo assim no terminal:
+4. Consultar a versão da npm(opcional):
+```npm -v```
 
-    ```* Running on http://127.0.0.1:5000/```
+5. Após instalar e verificar a versão, clone o repositório em sua máquina e vá até o diretório da aplicação com o comando:
+```cd shortest_route_planner```
 
-4. Abra seu navegador e acesse:
+6. Instale as dependências:
+```npm i```
 
-    ```http://127.0.0.1:5000/```
+7. Execute a aplicação localmente:
+```npm run dev```
+
+8. Vá até o endereço em seu navegador:
+```http://localhost:5173/```
 
 ## Uso 
 
-Basta abrir o endereço ```http://127.0.0.1:5000/``` no navegador e cadastrar algumas tarefas com dependências entre si, ou se preferir, pode carregar os templates cadastrados na aplicação.
+Basta abrir o endereço ```http://localhost:5173/``` no navegador e você deverá visualizar o grafo já definido. Agora selecione três nós de sua escolha do grafo e veja o caminho mais eficiente e econômico passando pelos três nós respectivamente.
 
 ## Outros 
 Quaisquer outras informações sobre seu projeto podem ser descritas abaixo.
