@@ -157,7 +157,7 @@ export function GraphView() {
       <button onClick={handleReset}>Limpar Seleção</button>
       {routeDistance !== null && (
         <p>
-          <strong>Total do Caminho:</strong> {routeDistance.toFixed(2)} km
+          <strong>Total do Caminho:</strong> {routeDistance.toFixed(2)}
         </p>
       )}
       <div ref={containerRef} style={{ height: "70vh" }} />
