@@ -27,13 +27,14 @@ export function GraphView() {
 
           graph.setNodeAttribute(node, "color", "#ffa500");
 
+          // divide os caminhos
           if (updated.length === 3) {
             const [start, mid, end] = updated;
             const path1 = dijkstra(graph, start, mid);
             const path2 = dijkstra(graph, mid, end);
             const fullPath = [...path1, ...path2.slice(1)];
 
-            // Calcular a distância total
+            // Calcula a distância total
             const totalDistance = calculateTotalDistance(graph, fullPath);
             setRouteDistance(totalDistance);
 
@@ -42,7 +43,7 @@ export function GraphView() {
               graph.setEdgeAttribute(edge, "color", "#ccc");
             });
 
-            // Animar caminhos
+            // Animar caminhos com cores diferntes
             animatePath(graph, path1, "#00f").then(() => {
               animatePath(graph, path2, "#f00");
             });
@@ -59,6 +60,7 @@ export function GraphView() {
   }, []);
 
   function dijkstra(graph: Graph, start: string, target: string): string[] {
+    // inicializando dicionarios
     const distances: Record<string, number> = {};
     const previous: Record<string, string | null> = {};
     const visited: Set<string> = new Set();
@@ -69,7 +71,7 @@ export function GraphView() {
       previous[node] = null;
     });
     distances[start] = 0;
-
+    // menor no nao visitado
     while (visited.size < nodes.length) {
       let closestNode: string | null = null;
       let minDistance = Infinity;
@@ -83,7 +85,7 @@ export function GraphView() {
 
       if (closestNode === null) break;
       visited.add(closestNode);
-
+      // atualiza dist dos vizinhos
       const neighbors = graph.neighbors(closestNode);
       for (const neighbor of neighbors) {
         if (visited.has(neighbor)) continue;
@@ -98,7 +100,7 @@ export function GraphView() {
         }
       }
     }
-
+    // reconstrucao do caminho com base nos nós até o inicio
     const path: string[] = [];
     let current: string | null = target;
     while (current) {
