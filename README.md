@@ -24,6 +24,10 @@ Screenshot da tela Home do projeto:
 
 ![Tela Inicial](./shortest_route_planner/src/assets/image2.png)
 
+3. Verificando a rota entre os nós Z, Y e A:
+
+![Demonstracao](./shortest_route_planner/src/assets/dyjktra_demonstracao%20.gif)
+
 ## Vídeo de apresentação e explicação do sistema TaskList
 
 [Link da Gravação]()
