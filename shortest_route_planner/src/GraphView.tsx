@@ -37,9 +37,9 @@ export function GraphView() {
               graph.setEdgeAttribute(edge, "color", "#ccc");
             });
 
-            // Destaque caminho de start -> mid
+            // Destaque caminho de start -> mid que é o ponto de coleta do caminhao
             animatePath(graph, path1, "#00f").then(() => {
-              // Destaque caminho de mid -> end após path1
+              // Destaque caminho de mid -> end (coleta - entrega )após percorrer o caimho 1()
               animatePath(graph, path2, "#f00");
             });
           }
@@ -130,7 +130,7 @@ export function GraphView() {
 
   return (
     <div>
-      <h1>Truck Route Optimizer</h1>
+      <h1>Shortest Route Planner</h1>
       <p>
         Clique em 3 nós: <strong>Garage</strong> (início), <strong>Coleta</strong> e <strong>Entrega</strong>
       </p>
