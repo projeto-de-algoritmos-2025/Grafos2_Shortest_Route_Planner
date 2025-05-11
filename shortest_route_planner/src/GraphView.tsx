@@ -151,7 +151,7 @@ export function GraphView() {
     <div>
       <h1>Shortest Route Planner</h1>
       <p>
-        Clique em 3 nós: <strong>Garage</strong> (início),{" "}
+        Clique em 3 nós: <strong>Partida</strong> (início),{" "}
         <strong>Coleta</strong> e <strong>Entrega</strong>
       </p>
       <button onClick={handleReset}>Limpar Seleção</button>
