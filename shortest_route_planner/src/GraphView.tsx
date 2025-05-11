@@ -7,6 +7,7 @@ export function GraphView() {
   const containerRef = useRef<HTMLDivElement>(null);
   const sigmaInstance = useRef<Sigma | null>(null);
   const [selectedNodes, setSelectedNodes] = useState<string[]>([]);
+  const [routeDistance, setRouteDistance] = useState<number | null>(null);
   const graphRef = useRef<Graph | null>(null);
 
   useEffect(() => {
@@ -14,8 +15,8 @@ export function GraphView() {
     graphRef.current = graph;
 
     if (containerRef.current) {
-      const renderer = new Sigma(graph, containerRef.current,{
-        renderEdgeLabels: true
+      const renderer = new Sigma(graph, containerRef.current, {
+        renderEdgeLabels: true,
       });
       sigmaInstance.current = renderer;
 
@@ -32,14 +33,17 @@ export function GraphView() {
             const path2 = dijkstra(graph, mid, end);
             const fullPath = [...path1, ...path2.slice(1)];
 
-            // Reset edge and node colors
+            // Calcular a distância total
+            const totalDistance = calculateTotalDistance(graph, fullPath);
+            setRouteDistance(totalDistance);
+
+            // Resetar cores
             graph.forEachEdge((edge) => {
               graph.setEdgeAttribute(edge, "color", "#ccc");
             });
 
-            // Destaque caminho de start -> mid que é o ponto de coleta do caminhao
+            // Animar caminhos
             animatePath(graph, path1, "#00f").then(() => {
-              // Destaque caminho de mid -> end (coleta - entrega )após percorrer o caimho 1()
               animatePath(graph, path2, "#f00");
             });
           }
@@ -83,7 +87,9 @@ export function GraphView() {
       const neighbors = graph.neighbors(closestNode);
       for (const neighbor of neighbors) {
         if (visited.has(neighbor)) continue;
-        const edge = graph.edge(closestNode, neighbor) || graph.edge(neighbor, closestNode);
+        const edge =
+          graph.edge(closestNode, neighbor) ||
+          graph.edge(neighbor, closestNode);
         const weight = graph.getEdgeAttribute(edge, "weight") || 1;
         const alt = distances[closestNode] + weight;
         if (alt < distances[neighbor]) {
@@ -102,6 +108,18 @@ export function GraphView() {
     return path;
   }
 
+  function calculateTotalDistance(graph: Graph, path: string[]): number {
+    let total = 0;
+    for (let i = 0; i < path.length - 1; i++) {
+      const from = path[i];
+      const to = path[i + 1];
+      const edge = graph.edge(from, to) || graph.edge(to, from);
+      const weight = graph.getEdgeAttribute(edge, "weight") || 1;
+      total += weight;
+    }
+    return total;
+  }
+
   async function animatePath(graph: Graph, path: string[], color: string) {
     for (let i = 0; i < path.length - 1; i++) {
       const from = path[i];
@@ -116,6 +134,7 @@ export function GraphView() {
 
   const handleReset = () => {
     setSelectedNodes([]);
+    setRouteDistance(null);
     const graph = graphRef.current;
     if (graph) {
       graph.forEachEdge((edge) => {
@@ -132,9 +151,15 @@ export function GraphView() {
     <div>
       <h1>Shortest Route Planner</h1>
       <p>
-        Clique em 3 nós: <strong>Garage</strong> (início), <strong>Coleta</strong> e <strong>Entrega</strong>
+        Clique em 3 nós: <strong>Garage</strong> (início),{" "}
+        <strong>Coleta</strong> e <strong>Entrega</strong>
       </p>
       <button onClick={handleReset}>Limpar Seleção</button>
+      {routeDistance !== null && (
+        <p>
+          <strong>Total do Caminho:</strong> {routeDistance.toFixed(2)} km
+        </p>
+      )}
       <div ref={containerRef} style={{ height: "70vh" }} />
     </div>
   );
