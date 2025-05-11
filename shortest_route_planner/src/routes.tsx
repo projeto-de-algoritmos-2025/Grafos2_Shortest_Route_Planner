@@ -1,5 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import { GraphView } from './GraphView'; // ajuste o caminho conforme sua pasta
+import { GraphView } from './GraphView';
 
 
 export const AppRoutes = () => {
