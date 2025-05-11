@@ -26,28 +26,44 @@ Screenshot da tela Home do projeto:
 **Framework**: React 19.1.0<br>
 
 1. Baixe o Node.js :
-```winget install Schniz.fnm```
+```
+winget install Schniz.fnm
+```
 
 2. instalar a Node.js:
-```fnm install 22```
+```
+fnm install 22
+```
 
 3. Consultar a versão da Node.js(opcional):
-```node -v ```
+```
+node -v 
+```
 
 4. Consultar a versão da npm(opcional):
-```npm -v```
+```
+npm -v
+```
 
 5. Após instalar e verificar a versão, clone o repositório em sua máquina e vá até o diretório da aplicação com o comando:
-```cd shortest_route_planner```
+```
+cd shortest_route_planner
+```
 
 6. Instale as dependências:
-```npm i```
+```
+npm i
+```
 
 7. Execute a aplicação localmente:
-```npm run dev```
+```
+npm run dev
+```
 
 8. Vá até o endereço em seu navegador:
-```http://localhost:5173/```
+```
+http://localhost:5173/
+```
 
 ## Uso 
 
