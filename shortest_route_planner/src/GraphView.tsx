@@ -14,13 +14,17 @@ export function GraphView() {
     graphRef.current = graph;
 
     if (containerRef.current) {
-      const renderer = new Sigma(graph, containerRef.current);
+      const renderer = new Sigma(graph, containerRef.current,{
+        renderEdgeLabels: true
+      });
       sigmaInstance.current = renderer;
 
-      renderer.on("clickNode", ({ node }) => {
+      renderer.on("clickNode", async ({ node }) => {
         setSelectedNodes((prev) => {
           if (prev.includes(node) || prev.length >= 3) return prev;
           const updated = [...prev, node];
+
+          graph.setNodeAttribute(node, "color", "#ffa500");
 
           if (updated.length === 3) {
             const [start, mid, end] = updated;
@@ -28,20 +32,16 @@ export function GraphView() {
             const path2 = dijkstra(graph, mid, end);
             const fullPath = [...path1, ...path2.slice(1)];
 
-            // Reset edge colors
+            // Reset edge and node colors
             graph.forEachEdge((edge) => {
               graph.setEdgeAttribute(edge, "color", "#ccc");
             });
 
-            for (let i = 0; i < fullPath.length - 1; i++) {
-              const from = fullPath[i];
-              const to = fullPath[i + 1];
-              if (graph.hasEdge(from, to)) {
-                graph.setEdgeAttribute(graph.edge(from, to), "color", "#00f");
-              } else if (graph.hasEdge(to, from)) {
-                graph.setEdgeAttribute(graph.edge(to, from), "color", "#00f");
-              }
-            }
+            // Destaque caminho de start -> mid
+            animatePath(graph, path1, "#00f").then(() => {
+              // Destaque caminho de mid -> end após path1
+              animatePath(graph, path2, "#f00");
+            });
           }
 
           return updated;
@@ -93,7 +93,6 @@ export function GraphView() {
       }
     }
 
-    // Reconstroi o caminho
     const path: string[] = [];
     let current: string | null = target;
     while (current) {
@@ -103,12 +102,28 @@ export function GraphView() {
     return path;
   }
 
+  async function animatePath(graph: Graph, path: string[], color: string) {
+    for (let i = 0; i < path.length - 1; i++) {
+      const from = path[i];
+      const to = path[i + 1];
+      const edge = graph.edge(from, to) || graph.edge(to, from);
+      if (edge) {
+        graph.setEdgeAttribute(edge, "color", color);
+        await new Promise((resolve) => setTimeout(resolve, 500));
+      }
+    }
+  }
+
   const handleReset = () => {
     setSelectedNodes([]);
     const graph = graphRef.current;
     if (graph) {
       graph.forEachEdge((edge) => {
         graph.setEdgeAttribute(edge, "color", "#ccc");
+      });
+      graph.forEachNode((node) => {
+        const baseColor = graph.getNodeAttribute(node, "baseColor") || "#999";
+        graph.setNodeAttribute(node, "color", baseColor);
       });
     }
   };
@@ -120,7 +135,7 @@ export function GraphView() {
         Clique em 3 nós: <strong>Garage</strong> (início), <strong>Coleta</strong> e <strong>Entrega</strong>
       </p>
       <button onClick={handleReset}>Limpar Seleção</button>
-      <div ref={containerRef} style={{ height: "600px" }} />
+      <div ref={containerRef} style={{ height: "70vh" }} />
     </div>
   );
 }
