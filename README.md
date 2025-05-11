@@ -10,12 +10,19 @@
 | 22/1007706  |  Elias Faria de Oliveira |
 
 ## Sobre
-O Shortest Route Planner é uma aplicação simples que implementa o algoritmo de dyjkstra em um grafo já pré-definido e apresenta uma simulação de como seria a rota de uma caminhão de entrega que parte de um nó que é o ponto de partida, passa pelo o segundo que é o ponto de coleta e por ultimo chega ao nó final que é o da entrega. A aplicação disponibiliza ao usuário selecionar os três nós desejados e retorna a rota mais eficiente para realizar a rota com os nós selecionados.
+O Shortest Route Planner é uma aplicação simples que implementa o algoritmo de dyjkstra em um grafo já pré-definido e apresenta uma simulação de como seria a rota de uma caminhão de entrega que parte de um nó, passa pelo o segundo que é o ponto de coleta e por ultimo chega ao nó final que é o da entrega. A aplicação disponibiliza ao usuário selecionar os três nós desejados e retorna a rota mais eficiente para realizar a rota com os nós selecionados, as arestas percorridas do nó de partida para o de coleta são destacadas em azul e as arestas do nó de coleta para o final de entrega, são destacadas em vermelho.
 
 ## Screenshots
 
 Screenshot da tela Home do projeto:
 
+1. Tela Inicial:
+
+![Tela Inicial](./shortest_route_planner/src/assets/image1.png)
+
+2. Cálculo da rota partindo de X, coletando em Y e entregando em M:
+
+![Tela Inicial](./shortest_route_planner/src/assets/image2.png)
 
 ## Vídeo de apresentação e explicação do sistema TaskList
 
